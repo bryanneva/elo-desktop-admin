@@ -1,0 +1,40 @@
+.management-screen {
+    display: grid;
+    grid-template-columns: 240px 720px;
+}
+
+.management-screen header {
+    grid-column: 1 / 3;
+    margin: 1rem 0;
+}
+
+.management-screen nav li {
+    list-style-type: none;
+}
+
+.management-screen form {
+    padding: .5rem;
+    background-color: rgba(211, 211, 211, 0.25);
+    border: 1px dashed lightgray;
+}
+
+.management-screen fieldset {
+    display: inline-block;
+    width: 49%;
+    padding: .2rem;
+}
+
+.management-screen label, .management-screen input {
+    display: block;
+}
+
+.management-screen input[type=text] {
+    padding: .2rem;
+    width: 90%;
+}
+
+.management-screen input[type=submit] {
+    padding: 1rem;
+    width: 25%;
+    font-size: 1.7rem;
+}

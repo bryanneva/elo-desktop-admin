@@ -1,0 +1,77 @@
+{
+  "name": "elo-desktop-admin",
+  "version": "0.1.0",
+  "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
+  "author": {
+    "name": "Bryan Neva",
+    "email": "bryan.neva@gmail.com",
+    "url": "https://github.com/bryanneva"
+  },
+  "build": {
+    "appId": "https://github.com/bryanneva/tabletennis",
+    "productName": "Elo Desktop Administrator",
+    "copyright": "Copyright © 2019 ${author}",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/rx": "^4.1.1",
+    "electron-is-dev": "^1.1.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-rxjs-connector": "^1.0.0",
+    "react-scripts": "3.3.0",
+    "rxjs": "^6.5.3",
+    "typescript": "~3.7.2"
+  },
+  "scripts": {
+    "start": "rescripts start",
+    "build": "rescripts build",
+    "test": "rescripts test",
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "electron-builder -mw"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@rescripts/cli": "^0.0.13",
+    "@rescripts/rescript-env": "^0.0.11",
+    "concurrently": "^5.0.1",
+    "electron": "^7.1.5",
+    "electron-builder": "^21.2.0",
+    "wait-on": "^3.3.0"
+  }
+}
