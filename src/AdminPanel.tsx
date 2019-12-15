@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useLayoutEffect} from "react";
+import {FormEvent, useLayoutEffect, useState} from "react";
 import {PlayerManagement} from "./components/PlayerManagement";
 import {NavLink} from "./components/NavLink";
 import {Container} from "./domain/container";
@@ -10,14 +10,25 @@ import {Ranking} from "./components/Ranking";
 import './AdminPanel.css';
 import {Play} from "./components/Play";
 import {useBehaviorSubject} from "react-rxjs-connector";
+import {BehaviorSubject, Observable} from "rxjs";
 
 interface Props {
   container: Container;
 }
 
+function useObservable<T>(observable: Observable<T>) {
+  const [observer, setObserver] = useState<T>();
+  useLayoutEffect(() => {
+    observable.subscribe(setObserver);
+  }, [observable]);
+
+  return observer;
+}
+
 const AdminPanel: React.FC<Props> = ({container}) => {
   const {route} = container.ui;
   const [currentRoute, setCurrentRoute] = useBehaviorSubject(route);
+
   useLayoutEffect(() => {
     container.init();
   }, [container]);
@@ -70,7 +81,41 @@ const AdminPanel: React.FC<Props> = ({container}) => {
         )}
       </section>
     </div>
+  );
+};
+
+
+const SplashPage: React.FC<Props & {ready: Observable<boolean>, serverUrl: BehaviorSubject<string>}> = ({container, ready, serverUrl}) => {
+  const isReady = useObservable(ready);
+  const [draftServerUrl, setDraftServerUrl] = useState<string>('');
+
+  if (isReady) {
+    return <AdminPanel container={container}/>
+  }
+
+  return (
+    <div>
+      <header>
+        <h1>Let's get started!</h1>
+      </header>
+      <form onSubmit={(e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        serverUrl.next(draftServerUrl);
+      }}>
+        <fieldset>
+          <label htmlFor="server-url">Server URL</label>
+          <input
+            type="text"
+            id="server-url"
+            onChange={(e) => setDraftServerUrl(e.target.value)}
+            value={draftServerUrl}/>
+        </fieldset>
+        <fieldset>
+          <input type="submit"/>
+        </fieldset>
+      </form>
+    </div>
   )
 };
 
-export default AdminPanel;
+export default SplashPage;

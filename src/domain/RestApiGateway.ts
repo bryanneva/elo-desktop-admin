@@ -1,17 +1,21 @@
 export interface ApiGateway {
   list(url: string): Promise<any>;
+
   create(url: string, body?: any): Promise<any>;
+
   update(url: string, body?: any): Promise<any>;
+
   destroy(url: string): Promise<any>;
 }
 
 export class RestApiGateway implements ApiGateway {
-
-  constructor(private urlBase: string = '') {
+  constructor(readonly urlBase: string = '') {
   }
 
   private api(url: string) {
-    return `${this.urlBase}${url}`;
+    const result = `${this.urlBase}${url}`;
+    console.log('fetching', result);
+    return result;
   }
 
   list(url: string) {
