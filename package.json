@@ -72,7 +72,7 @@
     "@rescripts/rescript-env": "^0.0.11",
     "@types/electron-json-storage": "^4.0.0",
     "concurrently": "^5.0.1",
-    "electron": "^7.1.5",
+    "electron": "^7.2.4",
     "electron-builder": "^21.2.0",
     "wait-on": "^3.3.0"
   }
